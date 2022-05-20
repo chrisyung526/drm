@@ -4,7 +4,7 @@
     <!--application.yml 传送参数, 不能使用logback 自带的<property>标签-->
     <!--TODO spring.application.name must in bootstrap.yml-->
     <springProperty scope="context" name="logName" source="spring.application.name" defaultValue="drm-admin-service"/>
-    <springProperty scope="context" name="logDir" source="logback.logDir" defaultValue="/Users/hyman/drm-admin-service"/>
+    <springProperty scope="context" name="logDir" source="logback.logDir" defaultValue="logs"/>
 
     <!--<property name="logback.logDir" value="/mnt/data01/logs/backend-web-service"/>-->
     <!--<property name="logback.logName" value="backend"/>-->
