@@ -1,0 +1,102 @@
+package ${package.Controller};
+
+import io.swagger.annotations.*;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.validation.annotation.Validated;
+import ${package.Entity}.${entity};
+import ${package.Service}.${table.serviceName};
+import cn.tcsoft.drm.controller.BaseController;
+import com.baomidou.mybatisplus.extension.api.R;
+import cn.tcsoft.drm.model.QueryPageDO;
+
+import cn.tcsoft.drm.config.log.Loggable;
+import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
+import java.util.List;
+/**
+ * <p>
+ * ${table.comment}  前端控制器
+ * </p>
+ *
+ * @author ${author}
+ * @since ${date}
+ */
+##添加Swagger注解
+@Api(tags = "${table.comment}")
+@RestController
+@RequestMapping("#if(${package.ModuleName})/${package.ModuleName}#end/${table.entityName.toLowerCase()}")
+public class ${table.controllerName} extends BaseController{
+
+   @Resource
+   private ${table.serviceName} ${table.entityName.toLowerCase()}Service;
+
+   /**
+    * 分页列表
+    */
+    @GetMapping("page")
+    @ApiOperation(value = "分页列表",notes = "分页列表查询",response = ${entity}.class)
+    @Loggable(description = "分页列表")
+    public R query${table.entityName}List(@Validated QueryPageDO query) {
+          return success(${table.entityName.toLowerCase()}Service.get${table.entityName}Page(query));
+    }
+
+   /**
+    * 根据id获取信息
+    */
+    @GetMapping("{id}")
+    @ApiOperation(value = "详情信息",notes = "根据主键查询数据详情",response = ${entity}.class)
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "id", value = "主键id", required = true, example = "1")
+    })
+    @Loggable(description = "详情信息")
+    public R get${table.entityName}InfoById(@PathVariable("id") Long id) {
+          return success(${table.entityName.toLowerCase()}Service.getInfoById(id));
+    }
+
+
+   /**
+    * 新增
+    */
+    @PostMapping("add")
+    @ApiOperation(value = "新增",notes = "新增数据")
+    @Loggable(description = "新增")
+    public R insert${table.entityName}(@RequestBody ${entity} ${table.entityName.toLowerCase()}) {
+          return success(${table.entityName.toLowerCase()}Service.insert${table.entityName}(${table.entityName.toLowerCase()}));
+    }
+
+    /**
+     * 更新
+     */
+     @PostMapping("update")
+     @ApiOperation(value = "修改",notes = "根据主键修改数据")
+     @Loggable(description = "修改")
+     public R update${table.entityName}(@RequestBody ${entity} ${table.entityName.toLowerCase()}) {
+          return success(${table.entityName.toLowerCase()}Service.update${table.entityName}(${table.entityName.toLowerCase()}));
+     }
+
+    /**
+     * 根据id删除
+     */
+     @DeleteMapping("{id}")
+     @ApiOperation(value = "删除",notes = "根据主键删除数据")
+     @ApiImplicitParams({
+             @ApiImplicitParam(name = "id", value = "主键id", required = true, example = "1")
+     })
+     @Loggable(description = "删除")
+     public R delete(@PathVariable("id") Long id) {
+          return success(${table.entityName.toLowerCase()}Service.delete(id));
+     }
+
+    /**
+     * 根据id列表批量删除
+     */
+     @DeleteMapping("delete")
+     @ApiOperation(value = "批量删除",notes = "根据主键列表删除数据")
+     @ApiImplicitParams({
+             @ApiImplicitParam(name = "ids", value = "id列表", required = true, example = "1,2,3")
+     })
+     @Loggable(description = "批量删除")
+     public R batchDelete(@RequestParam("ids") List<Long> ids) {
+        return success(${table.entityName.toLowerCase()}Service.deleteList(ids));
+     }
+}

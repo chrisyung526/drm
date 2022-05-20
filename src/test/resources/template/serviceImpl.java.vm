@@ -1,0 +1,115 @@
+package ${package.ServiceImpl};
+
+import ${package.Entity}.${entity};
+import ${package.Mapper}.${table.mapperName};
+import ${package.Service}.${table.serviceName};
+import ${superServiceImplClassPackage};
+import java.util.List;
+import java.util.Objects;
+import cn.tcsoft.drm.ApiErrorCode;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import org.springframework.stereotype.Service;
+import lombok.extern.slf4j.Slf4j;
+import cn.tcsoft.drm.model.QueryPageDO;
+import org.springframework.transaction.annotation.Transactional;
+import com.baomidou.mybatisplus.extension.exceptions.ApiException;
+
+import javax.annotation.Resource;
+
+/**
+ * <p>
+ * ${table.comment}  服务实现类
+ * </p>
+ *
+ * @author ${author}
+ * @since ${date}
+ */
+@Slf4j
+@Service
+public class ${table.serviceImplName} extends ${superServiceImplClass}<${table.mapperName}, ${entity}> implements ${table.serviceName} {
+
+   @Resource
+   private ${table.mapperName} ${table.entityName.toLowerCase()}Mapper;
+
+   /**
+   * 注意当前的id主键 是默认的"id"，具体情况根据数据库主键的名称进行修改
+   */
+   @Override
+   public ${entity} getInfoById(Long id){
+        ${entity} ${table.entityName.toLowerCase()} = ${table.entityName.toLowerCase()}Mapper.selectById(id);
+        if (Objects.isNull(${table.entityName.toLowerCase()})){
+            throw new ApiException(ApiErrorCode.DATA_NOT_FOUND);
+        }
+        return ${table.entityName.toLowerCase()};
+   }
+
+
+   @Override
+   @Transactional(rollbackFor = Exception.class)
+   public boolean update${table.entityName}(${entity} ${table.entityName.toLowerCase()}){
+        if (Objects.isNull(${table.entityName.toLowerCase()}.getId())){
+            throw new ApiException(ApiErrorCode.PARAMETER_CHECK_ERROR);
+        }
+        int row = 0;
+        try {
+            row = ${table.entityName.toLowerCase()}Mapper.updateById(${table.entityName.toLowerCase()});
+        } catch (Exception e) {
+           e.printStackTrace();
+           log.error("[{${table.entityName.toLowerCase()}}] 未知异常");
+        }
+        return row > 0;
+   }
+
+   @Override
+   @Transactional(rollbackFor = Exception.class)
+   public boolean insert${table.entityName}(${entity} ${table.entityName.toLowerCase()}){
+        int row = 0;
+        try {
+            row = ${table.entityName.toLowerCase()}Mapper.insert(${table.entityName.toLowerCase()});
+        } catch (Exception e) {
+           e.printStackTrace();
+           log.error("[{${table.entityName.toLowerCase()}}] 未知异常");
+        }
+        return row > 0;
+   }
+
+   @Override
+   @Transactional(rollbackFor = Exception.class)
+   public boolean delete(Long id){
+        if (Objects.isNull(id)){
+            throw new ApiException(ApiErrorCode.PARAMETER_CHECK_ERROR);
+        }
+        int row = 0;
+        try {
+            row = ${table.entityName.toLowerCase()}Mapper.deleteById(id);
+        } catch (Exception e) {
+           e.printStackTrace();
+           log.error("[{${table.entityName.toLowerCase()}}] 未知异常");
+        }
+        return row > 0;
+   }
+
+    @Override
+    @Transactional(rollbackFor = Exception.class)
+    public boolean deleteList(List<Long> ids) {
+        if (Objects.isNull(ids)){
+            throw new ApiException(ApiErrorCode.PARAMETER_CHECK_ERROR);
+        }
+        int row = 0;
+        try {
+            row = ${table.entityName.toLowerCase()}Mapper.deleteBatchIds(ids);
+        } catch (Exception e) {
+            e.printStackTrace();
+            log.error("[{${table.entityName.toLowerCase()}}] 未知异常");
+        }
+        return row>0;
+   }
+
+   @Override
+   public Page<${entity}> get${table.entityName}Page(QueryPageDO query){
+        Page<${entity}> ${table.entityName.toLowerCase()}Page = ${table.entityName.toLowerCase()}Mapper.selectPage(new Page<>(query.getCurrent(),query.getSize()), new QueryWrapper<${entity}>());
+        return ${table.entityName.toLowerCase()}Page;
+   }
+}
