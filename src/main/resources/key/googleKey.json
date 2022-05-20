@@ -1,0 +1,12 @@
+{
+  "type": "service_account",
+  "project_id": "mythic-music-340302",
+  "private_key_id": "b0c44e926f7913c3300d0925581cda75938e957c",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvAIBADANBgkqhkiG9w0BAQEFAASCBKYwggSiAgEAAoIBAQCtb1D7g0//AvjL\nwkLPgrczsTFnD0d5B17BALoXvbRSQxe67KYAAnFWchQT49uH0Ydx+5R7L+1+LBji\nzqbMiV/UDglScNtcUhIGia9j46qAvJva/pDP29ID9zyB7QjXsGYbZqfwWpN8Reet\nrsfv6xyt4T4Gr4k7m3d/aqbf7jftbCYq0ZokH5Ccm0kK20xp7GRSWw8c6ryuZSOE\nsQw5Xui9x4JUZoVTCTon50VKbpQ1a+znRE7ErtnMKOvhjSjYHkkXt2B4hexiaXf0\nkcUAylR8JwIwL7DEar8h4VSutEQ3Dzk9H4DBCzdH3fAPHDyzHMQhDeVCYB7UTXlm\nRgivyo1BAgMBAAECggEARAi5R1idDmevilqzk6xuymfVfdyoCGmkOWjcF0kTDfwE\nuI5xlepfZG5Owvis2uwOSl/KwMIt00NgJcSz+ONgxJIXBRCBdIc7S/ZB55jc/zA9\noVwgGXHdQjH/ueXuhJHNlC0ibu5REbxoZCD+jHZ54xnLF5tPZaMYbtK7EHfl14vh\nMvSxpvLqZnFUj6iE27rklj4REqk+Ue/XteY76xEhBtYDCXHIiwisCuKsT6kSdnfT\n/eH9U2+2VkHpKTdZ8sMjDP3tKNfTMsB4vvS+gdpEADDUlg9BQVmKZJm+WSGvyQCG\nyFOVMLELJyKivt4v8WYck/04zLttF0VBrHvdwNqfcwKBgQDtfLkZ/CiqT2bIrlDi\nET+SRUWE613PVNtmMnlGTWBXL394Mu+7vvRImIzBbGDWuVqdNg2aXpPWLvpLCA5e\n9fcUB43VaSpO/athunfquhljszQXC+uH6K+NL+vn1bcAMwaFC8KzHXj7PhDje8U/\nEPb7N7Jj56IPGQcv9VvZsxkdTwKBgQC69F5ytOlRlVO9Lch2V9I5TBNcY/GZxGdL\nRu+s70uBra2OOzTqrhMSHc18YXuZLFKcJWbE1b3zaHF0tdx1v7VSYzcrP5Vo0hFG\nNtwdWxoYqpbZ2Jfzicuoa+4tKe0KUDznoFVicg3DNWc95sWZTsfHSZTk6HHQ/ZCs\nE1xjG+WobwKBgGgO+lw0bO0TFYphNveXby98QtXW+6fZGrlQ7GqthMUu/r+AMiMl\nrIwSq7ok7tmnJdk00gkN3+E9fFZcFU/unnCcTr1v8yXhaLLNrbWgDXfuEaj3hCBt\nCF7o3Ikcz666rOSnHoy1IUmVDHlgxjC4EkBJS1UTLaNH6CpPbAubuilpAoGAMQLx\nY8bzx9SLAHRpMkUxsp20EauN4g7wOXbeTIrrU5LRhhEVfVSnYT946FuyCGTrP046\n0+1o/8/otn0az6+zfGbQRsFDjRhNOQgWyodgnwjRxUiYBVuhjYTGCwcLwoFohhyt\nZcKawwtUBpFiSh+yFhe/NgeOFwjyjXoB5WWh3ncCgYArC2+gn5hp+x12sqDUHLxF\ntCaL9hgEQpDjRbB1vLstFf+l5t0htMMBX79XXu0Uf2o9bNAuhMzwoizWYqxcdnCJ\nk8GczraWPgDxcR57xlsBAv1ywGGN0i2TFrJB1tAySd1TFN9Qahr1UTy920se3bEq\nrtWmKN1TaWY7rTx3qm7a4A==\n-----END PRIVATE KEY-----\n",
+  "client_email": "test-541@mythic-music-340302.iam.gserviceaccount.com",
+  "client_id": "102837761564934714558",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/test-541%40mythic-music-340302.iam.gserviceaccount.com"
+}

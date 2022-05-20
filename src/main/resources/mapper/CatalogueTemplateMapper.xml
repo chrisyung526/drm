@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.tcsoft.drm.mapper.CatalogueTemplateMapper">
+    <resultMap id="BaseResultMap" type="cn.tcsoft.drm.model.vo.CatalogueTemplateVO">
+        <id column="id" property="id"/>
+        <result column="template_name" property="templateName"/>
+        <result column="template_descrip" property="templateDescrip"/>
+        <result column="material_type" property="materialType"/>
+        <result column="metadata_field_id" property="metadataFieldId"/>
+        <result column="text_value" property="textValue"/>
+        <result column="place" property="place"/>
+        <result column="authority" property="authority"/>
+        <result column="org_id" property="orgId"/>
+        <result column="org_name" property="orgName"/>
+        <result column="create_by" property="createBy"/>
+        <result column="create_dt" property="createDt"/>
+        <result column="is_delete" property="isDelete"/>
+        <result column="last_upd_by" property="lastUpdBy"/>
+    </resultMap>
+
+    <select id="pageList" resultMap="BaseResultMap">
+        SELECT BMCT.id,
+               BMCT.template_name,
+               BMCT.template_descrip,
+               BMCT.material_type,
+               BMCT.is_delete,
+               BMCT.last_upd_by,
+               BMCT.last_upd_dt,
+               BMCT.org_id,
+               BMCT.org_name,
+               BMCT.create_by,
+               BMCT.create_dt,
+               BMCTF.authority,
+               BMCTF.metadata_field_id,
+               BMCTF.place,
+               BMCTF.template_id,
+               BMCTF.text_value
+        FROM biz_mmis_catalogue_template BMCT
+                 LEFT JOIN biz_mmis_catalogue_template_field BMCTF ON BMCT.id = BMCTF.template_id
+        <where>
+            BMCT.is_delete = 0
+            <if test="query.templateId != null">
+                and BMCT.id = #{query.templateId}
+            </if>
+            <if test="query.templateName != null and query.templateName != ''">
+                and (BMCT.template_name like concat('%',#{query.templateName},'%'))
+            </if>
+            <if test="query.materialType != null and query.materialType != ''">
+                and (BMCT.material_type like concat('%',#{query.materialType},'%'))
+            </if>
+            <if test="query.templateDescrip != null and query.templateDescrip != ''">
+                and (BMCT.template_descrip like concat('%',#{query.templateDescrip},'%'))
+            </if>
+            <if test="query.beginCreateDate != null">
+                and BMCT.create_dt >= #{query.beginCreateDate}
+            </if>
+            <if test="query.endCreateDate != null">
+                and BMCT.create_dt &lt;= #{query.endCreateDate}
+            </if>
+            <if test="query.beginLastCreateDate != null">
+                and BMCT.last_upd_dt >= #{query.beginLastCreateDate}
+            </if>
+            <if test="query.endLastCreateDate != null">
+                and BMCT.last_upd_dt &lt;= #{query.endLastCreateDate}
+            </if>
+        </where>
+    </select>
+
+    <select id="selectCatalogueTemplateVOById" resultMap="BaseResultMap">
+        SELECT BMCT.id,
+        BMCT.template_name,
+        BMCT.template_descrip,
+        BMCT.material_type,
+        BMCT.is_delete,
+        BMCT.last_upd_by,
+        BMCT.last_upd_dt,
+        BMCT.org_id,
+        BMCT.org_name,
+        BMCT.create_by,
+        BMCT.create_dt,
+        BMCTF.authority,
+        BMCTF.metadata_field_id,
+        BMCTF.place,
+        BMCTF.template_id,
+        BMCTF.text_value
+        FROM biz_mmis_catalogue_template BMCT
+        LEFT JOIN biz_mmis_catalogue_template_field BMCTF ON BMCT.id = BMCTF.template_id
+        <where>
+            BMCT.id = #{id}
+        </where>
+    </select>
+    <select id="getAll" resultMap="BaseResultMap">
+        SELECT BMCT.id,
+        BMCT.template_name,
+        BMCT.template_descrip,
+        BMCT.material_type,
+        BMCT.is_delete,
+        BMCT.last_upd_by,
+        BMCT.last_upd_dt,
+        BMCT.org_id,
+        BMCT.org_name,
+        BMCT.create_by,
+        BMCT.create_dt,
+        BMCTF.authority,
+        BMCTF.metadata_field_id,
+        BMCTF.place,
+        BMCTF.template_id,
+        BMCTF.text_value
+        FROM biz_mmis_catalogue_template BMCT
+        LEFT JOIN biz_mmis_catalogue_template_field BMCTF ON BMCT.id = BMCTF.template_id
+        <where>
+            BMCT.is_delete = 0
+        </where>
+    </select>
+    <select id="getListByIds" resultMap="BaseResultMap">
+        SELECT BMCT.id,
+        BMCT.template_name,
+        BMCT.template_descrip,
+        BMCT.material_type,
+        BMCT.is_delete,
+        BMCT.last_upd_by,
+        BMCT.last_upd_dt,
+        BMCT.org_id,
+        BMCT.org_name,
+        BMCT.create_by,
+        BMCT.create_dt,
+        BMCTF.authority,
+        BMCTF.metadata_field_id,
+        BMCTF.place,
+        BMCTF.template_id,
+        BMCTF.text_value
+        FROM biz_mmis_catalogue_template BMCT
+        LEFT JOIN biz_mmis_catalogue_template_field BMCTF ON BMCT.id = BMCTF.template_id
+        where BMCT.is_delete = 0 AND BMCT.id IN
+        <foreach collection="ids" open="(" item="id" separator="," close=")">
+            #{id}
+        </foreach>
+
+    </select>
+</mapper>

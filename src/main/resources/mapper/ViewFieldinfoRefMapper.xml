@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.tcsoft.drm.mapper.admin.system.ViewFieldinfoRefMapper">
+
+    <select id="selectByViewId" resultType="cn.tcsoft.drm.entity.admin.system.ViewFieldinfoRef">
+        select bhvflr.*, bhfi.field_name as fieldDesc, bhfi.field_another_name as fieldName,
+               bhft.name_cn as fieldTypeName
+        from biz_hkmp_view_fieldinfo_ref bhvflr
+                 left join biz_hkmp_field_info bhfi on bhfi.id = bhvflr.field_id
+        left join biz_hkmp_field_type bhft on bhfi.field_type_id=bhft.id
+        where bhvflr.view_id=#{vid}
+    </select>
+</mapper>

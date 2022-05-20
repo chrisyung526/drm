@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.tcsoft.drm.mapper.admin.system.HkmpFieldInfoMapper">
+
+    <select id="list" resultType="cn.tcsoft.drm.entity.admin.system.HkmpFieldInfo">
+
+        select
+        bhfi.id, bhft.name_cn as fieldTypeName,
+        (select count(id) from biz_hkmp_view_fieldinfo_ref b where b.field_id=bhfi.id) as fieldViewRefCount,
+        bhfi.field_name as fieldName, bhfi.field_another_name as fieldAnotherName, bhfi.create_by, bhfi.create_dt
+        from biz_hkmp_field_info bhfi
+        left join biz_hkmp_field_type bhft on bhfi.field_type_id=bhft.id
+        left join biz_hkmp_view_fieldinfo_ref bhvfIr on bhvfIr.field_id=bhfi.id
+        <where>
+            <if test="vo.fieldName!=null and vo.fieldName!=''">
+                and bhfi.field_name = #{vo.fieldName}
+            </if>
+            <if test="vo.fieldAnotherName!=null and vo.fieldAnotherName!=''">
+                and bhfi.field_another_name = #{vo.fieldAnotherName}
+            </if>
+            <if test="vo.fieldTypeId!=null and vo.fieldTypeId!=''">
+                and bhfi.field_type_id = #{vo.fieldTypeId}
+            </if>
+            <if test="vo.createBy!=null and vo.createBy!=''">
+                and bhfi.create_by = #{vo.createBy}
+            </if>
+            <if test="vo.createDt!=null">
+                and bhfi.create_dt >= #{vo.createDt}
+            </if>
+            <if test="vo.keyword!=null and vo.keyword!='' ">
+                and CONCAT(bhfi.field_name,bhfi.field_another_name) like concat('%',#{vo.keyword},'%')
+            </if>
+        </where>
+        <if test="vo.sortColumns!=null">
+            order by bhfi.create_dt
+            <if test="vo.sortDesc!=null">
+                desc
+            </if>
+        </if>
+
+    </select>
+</mapper>

@@ -1,0 +1,503 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.tcsoft.drm.mapper.MetadataFieldMapper">
+    <resultMap id="BaseResultMap" type="cn.tcsoft.drm.model.vo.MetadataFieldVO">
+        <id column="id" property="id"/>
+        <result column="metadata_schema_id" property="metadataSchemaId"/>
+        <result column="element" property="element"/>
+        <result column="qualifier" property="qualifier"/>
+        <result column="scope_note" property="scopeNote"/>
+        <result column="type" property="type"/>
+        <result column="length" property="length"/>
+        <result column="effective_scope" property="effectiveScope"/>
+        <result column="content_cover_page_label" property="contentCoverPageLabel"/>
+        <result column="content_cover_page_label_chi" property="contentCoverPageLabelChi"/>
+        <result column="content_cover_page_label_eng" property="contentCoverPageLabelEng"/>
+        <result column="content_highlight_label" property="contentHighlightLabel"/>
+        <result column="content_highlight_label_chi" property="contentHighlightLabelChi"/>
+        <result column="content_highlight_label_eng" property="contentHighlightLabelEng"/>
+        <result column="controlled_field" property="controlledField"/>
+        <result column="org_id" property="orgId"/>
+        <result column="org_name" property="orgName"/>
+        <result column="create_by" property="createBy"/>
+        <result column="create_dt" property="createDt"/>
+        <result column="is_delete" property="isDelete"/>
+        <result column="last_upd_by" property="lastUpdBy"/>
+        <result column="namespace" property="namespace"/>
+        <result column="short_id" property="shortId"/>
+        <result column="controlled_group" property="controlledGroup"/>
+        <result column="controlled_attribute" property="controlledAttribute"/>
+        <result column="brief" property="brief"/>
+        <result column="order_brief" property="orderBrief"/>
+        <result column="detail" property="detail"/>
+        <result column="order_detail" property="orderDetail"/>
+        <result column="hit_list" property="hitList"/>
+        <result column="order_hit_list" property="orderHitList"/>
+        <result column="lock_tag" property="lockTag"/>
+        <result column="dc_element" property="dcElement"/>
+        <result column="dc_qualifier" property="dcQualifier"/>
+        <result column="ref_table_name" property="refTableName"/>
+        <result column="repeatable" property="repeatable"/>
+        <result column="dc_mandatory" property="dcMandatory"/>
+        <result column="display_field" property="displayField"/>
+        <result column="internal" property="internal"/>
+        <result column="status" property="status"/>
+        <result column="updated_by_system" property="updatedBySystem"/>
+        <result column="field_id" property="fieldId"/>
+    </resultMap>
+
+    <select id="selectMetadataFieldVOById" resultMap="BaseResultMap">
+        SELECT BMMS.id,
+               BMMF.metadata_schema_id,
+               BMMF.element,
+               BMMF.qualifier,
+               BMMF.scope_note,
+               BMMF.type,
+               BMMF.length,
+               BMMF.effective_scope,
+               BMMF.content_cover_page_label,
+               BMMF.content_cover_page_label_chi,
+               BMMF.content_cover_page_label_eng,
+               BMMF.content_highlight_label,
+               BMMF.content_highlight_label_chi,
+               BMMF.content_highlight_label_eng,
+               BMMF.controlled_field,
+               BMMF.org_id,
+               BMMF.org_name,
+               BMMF.create_by,
+               BMMF.create_dt,
+               BMMS.is_delete,
+               BMMF.last_upd_by,
+               BMMF.last_upd_dt,
+               BMMS.namespace,
+               BMMS.short_id,
+               BMMFCG.field_id,
+               BMMFCG.controlled_group,
+               BMMFCG.controlled_attribute,
+               BMMFCG.status,
+               BMMFD.updated_by_system,
+               BMMFD.brief,
+               BMMFD.order_brief,
+               BMMFD.detail,
+               BMMFD.order_detail,
+               BMMFD.hit_list,
+               BMMFD.order_hit_list,
+               BMMFD.lock_tag,
+               BMMFP.dc_element,
+               BMMFP.dc_qualifier,
+               BMMFP.ref_table_name,
+               BMMFP.`repeatable`,
+               BMMFP.dc_mandatory,
+               BMMFP.display_field,
+               BMMFP.internal
+        FROM biz_mmis_metadata_schema BMMS
+                 LEFT JOIN biz_mmis_metadata_field BMMF ON BMMF.metadata_schema_id = BMMS.id
+                 LEFT JOIN biz_mmis_metadata_field_controlled_group BMMFCG ON BMMF.id = BMMFCG.field_id
+                 LEFT JOIN biz_mmis_metadata_field_display BMMFD ON BMMF.id = BMMFD.field_id
+                 LEFT JOIN biz_mmis_metadata_field_properties BMMFP ON BMMF.id = BMMFP.field_id
+        where BMMS.id = #{id}
+          AND BMMS.is_delete = 0
+    </select>
+    <select id="list" resultMap="BaseResultMap">
+        SELECT
+        BMMS.id,
+        BMMF.metadata_schema_id,
+        BMMF.element,
+        BMMF.qualifier,
+        BMMF.scope_note,
+        BMMF.type,
+        BMMF.length,
+        BMMF.effective_scope,
+        BMMF.content_cover_page_label,
+        BMMF.content_cover_page_label_chi,
+        BMMF.content_cover_page_label_eng,
+        BMMF.content_highlight_label,
+        BMMF.content_highlight_label_chi,
+        BMMF.content_highlight_label_eng,
+        BMMF.controlled_field,
+        BMMF.org_id,
+        BMMF.org_name,
+        BMMF.create_by,
+        BMMF.create_dt,
+        BMMS.is_delete,
+        BMMF.last_upd_by,
+        BMMF.last_upd_dt,
+        BMMS.namespace,
+        BMMS.short_id,
+        BMMFCG.field_id,
+        BMMFCG.controlled_group,
+        BMMFCG.controlled_attribute,
+        BMMFCG.status,
+        BMMFD.updated_by_system,
+        BMMFD.brief,
+        BMMFD.order_brief,
+        BMMFD.detail,
+        BMMFD.order_detail,
+        BMMFD.hit_list,
+        BMMFD.order_hit_list,
+        BMMFD.lock_tag,
+        BMMFP.dc_element,
+        BMMFP.dc_qualifier,
+        BMMFP.ref_table_name,
+        BMMFP.`repeatable`,
+        BMMFP.dc_mandatory,
+        BMMFP.display_field,
+        BMMFP.internal
+        FROM biz_mmis_metadata_schema BMMS
+        LEFT JOIN biz_mmis_metadata_field BMMF ON BMMF.metadata_schema_id = BMMS.id
+        LEFT JOIN biz_mmis_metadata_field_controlled_group BMMFCG ON BMMF.id = BMMFCG.field_id
+        LEFT JOIN biz_mmis_metadata_field_display BMMFD ON BMMF.id = BMMFD.field_id
+        LEFT JOIN biz_mmis_metadata_field_properties BMMFP ON BMMF.id = BMMFP.field_id
+        <where>
+            BMMS.is_delete = 0
+            <if test="query.element != null and query.element != ''">
+                and (BMMF.element like concat('%',#{query.element},'%'))
+            </if>
+            <if test="query.qualifier != null and query.qualifier != ''">
+                and (BMMF.qualifier like concat('%',#{query.qualifier},'%'))
+            </if>
+            <if test="query.controlledAttribute != null and query.controlledAttribute != ''">
+                and (BMMFCG.controlled_attribute like concat('%',#{query.controlledAttribute},'%'))
+            </if>
+            <if test="query.fieldId != null">
+                and BMMFCG.field_id = #{query.fieldId}
+            </if>
+            <if test="query.metadataSchemaId != null">
+                and BMMF.metadata_schema_id = #{query.metadataSchemaId}
+            </if>
+
+            <if test="query.controlledGroup != null and query.controlledGroup != ''">
+                and (BMMFCG.controlled_group like concat('%',#{query.controlledGroup},'%'))
+            </if>
+            <if test="query.controlledField != null and query.controlledField != ''">
+                and (BMMF.controlled_field like concat('%',#{query.controlledField},'%'))
+            </if>
+            <if test="query.type != null and query.type != ''">
+                and (BMMF.type like concat('%',#{query.type},'%') )
+            </if>
+            <if test="query.effectiveScope != null and query.effectiveScope != ''">
+                and (BMMF.effective_scope like concat('%',#{query.effectiveScope},'%') )
+            </if>
+            <if test="query.status != null and query.status != ''">
+                and (BMMFCG.status like concat('%',#{query.status},'%'))
+            </if>
+            <if test="query.repeatable != null and query.repeatable != ''">
+                and (BMMFP.`repeatable` like concat('%',#{query.repeatable},'%'))
+            </if>
+            <if test="query.dcMandatory != null and query.dcMandatory != ''">
+                and (BMMFP.dc_mandatory like concat('%',#{query.dcMandatory},'%'))
+            </if>
+            <if test="query.updatedBySystem != null and query.updatedBySystem != ''">
+                and (BMMFD.updated_by_system like concat('%',#{query.updatedBySystem},'%'))
+            </if>
+            <if test="query.displayField != null">
+                and BMMFP.display_field in
+                <foreach collection="query.displayField" open="(" item="field" separator="," close=")">
+                    #{field}
+                </foreach>
+            </if>
+            <if test="query.sortDesc != null and query.sortDesc != true " >
+                <if test="query.sortColumns == 'MetadataFieldID'">
+                    ORDER BY BMMFCG.field_id
+                </if>
+                <if test="query.sortColumns == 'MetadataSchemaID'">
+                    ORDER BY BMMF.metadata_schema_id
+                </if>
+                <if test="query.sortColumns == 'Element'">
+                    ORDER BY BMMF.element
+                </if>
+                <if test="query.sortColumns == 'Qualifier'">
+                    ORDER BY BMMF.qualifier
+                </if>
+                <if test="query.sortColumns == 'Attribute'">
+                    ORDER BY BMMFCG.controlled_attribute
+                </if>
+                <if test="query.sortColumns == 'MetadataType'">
+                    ORDER BY BMMF.type
+                </if>
+                <if test="query.sortColumns == 'MetadataEffectiveScope'">
+                    ORDER BY BMMF.effective_scope
+                </if>
+                <if test="query.sortColumns == 'DisplayField'">
+                    ORDER BY BMMFP.display_field
+                </if>
+                <if test="query.sortColumns == 'MandatoryField'">
+                    ORDER BY BMMFP.dc_mandatory
+                </if>
+                <if test="query.sortColumns == 'RepeatableField'">
+                    ORDER BY BMMFP.`repeatable`
+                </if>
+                <if test="query.sortColumns == 'ControlledField'">
+                    ORDER BY BMMF.controlled_field
+                </if>
+                <if test="query.sortColumns == 'ControlledFieldGroup'">
+                    ORDER BY BMMFCG.controlled_group
+                </if>
+                <if test="query.sortColumns == 'UpdatedbySystem'">
+                    ORDER BY BMMFD.updated_by_system
+                </if>
+                <if test="query.sortColumns == 'Status'">
+                    ORDER BY BMMFCG.status
+                </if>
+            </if>
+            <if test="query.sortDesc != null and query.sortDesc != false " >
+                <if test="query.sortColumns == 'MetadataFieldID'">
+                    ORDER BY BMMFCG.field_id DESC
+                </if>
+                <if test="query.sortColumns == 'MetadataSchemaID'">
+                    ORDER BY BMMF.metadata_schema_id DESC
+                </if>
+                <if test="query.sortColumns == 'Element'">
+                    ORDER BY BMMF.element DESC
+                </if>
+                <if test="query.sortColumns == 'Qualifier'">
+                    ORDER BY BMMF.qualifier DESC
+                </if>
+                <if test="query.sortColumns == 'Attribute'">
+                    ORDER BY BMMFCG.controlled_attribute DESC
+                </if>
+                <if test="query.sortColumns == 'MetadataType'">
+                    ORDER BY BMMF.type DESC
+                </if>
+                <if test="query.sortColumns == 'MetadataEffectiveScope'">
+                    ORDER BY BMMF.effective_scope DESC
+                </if>
+                <if test="query.sortColumns == 'DisplayField'">
+                    ORDER BY BMMFP.display_field DESC
+                </if>
+                <if test="query.sortColumns == 'MandatoryField'">
+                    ORDER BY BMMFP.dc_mandatory DESC
+                </if>
+                <if test="query.sortColumns == 'RepeatableField'">
+                    ORDER BY BMMFP.`repeatable` DESC
+                </if>
+                <if test="query.sortColumns == 'ControlledField'">
+                    ORDER BY BMMF.controlled_field DESC
+                </if>
+                <if test="query.sortColumns == 'ControlledFieldGroup'">
+                    ORDER BY BMMFCG.controlled_group DESC
+                </if>
+                <if test="query.sortColumns == 'UpdatedbySystem'">
+                    ORDER BY BMMFD.updated_by_system DESC
+                </if>
+                <if test="query.sortColumns == 'Status'">
+                    ORDER BY BMMFCG.status DESC
+                </if>
+
+            </if>
+        </where>
+    </select>
+
+    <select id="getAll" resultMap="BaseResultMap">
+        SELECT
+            BMMS.id,
+            BMMF.metadata_schema_id,
+            BMMF.element,
+            BMMF.qualifier,
+            BMMF.scope_note,
+            BMMF.type,
+            BMMF.length,
+            BMMF.effective_scope,
+            BMMF.content_cover_page_label,
+            BMMF.content_cover_page_label_chi,
+            BMMF.content_cover_page_label_eng,
+            BMMF.content_highlight_label,
+            BMMF.content_highlight_label_chi,
+            BMMF.content_highlight_label_eng,
+            BMMF.controlled_field,
+            BMMF.org_id,
+            BMMF.org_name,
+            BMMF.create_by,
+            BMMF.create_dt,
+            BMMS.is_delete,
+            BMMF.last_upd_by,
+            BMMF.last_upd_dt,
+            BMMS.namespace,
+            BMMS.short_id,
+            BMMFCG.field_id,
+            BMMFCG.controlled_group,
+            BMMFCG.controlled_attribute,
+            BMMFCG.status,
+            BMMFD.updated_by_system,
+            BMMFD.brief,
+            BMMFD.order_brief,
+            BMMFD.detail,
+            BMMFD.order_detail,
+            BMMFD.hit_list,
+            BMMFD.order_hit_list,
+            BMMFD.lock_tag,
+            BMMFP.dc_element,
+            BMMFP.dc_qualifier,
+            BMMFP.ref_table_name,
+            BMMFP.`repeatable`,
+            BMMFP.dc_mandatory,
+            BMMFP.display_field,
+            BMMFP.internal
+        FROM biz_mmis_metadata_schema BMMS
+                 LEFT JOIN biz_mmis_metadata_field BMMF ON BMMF.metadata_schema_id = BMMS.id
+                 LEFT JOIN biz_mmis_metadata_field_controlled_group BMMFCG ON BMMF.id = BMMFCG.field_id
+                 LEFT JOIN biz_mmis_metadata_field_display BMMFD ON BMMF.id = BMMFD.field_id
+                 LEFT JOIN biz_mmis_metadata_field_properties BMMFP ON BMMF.id = BMMFP.field_id
+        where BMMS.is_delete = 0
+    </select>
+    <select id="getListByIds" resultMap="BaseResultMap">
+        SELECT
+        BMMS.id,
+        BMMF.metadata_schema_id,
+        BMMF.element,
+        BMMF.qualifier,
+        BMMF.scope_note,
+        BMMF.type,
+        BMMF.length,
+        BMMF.effective_scope,
+        BMMF.content_cover_page_label,
+        BMMF.content_cover_page_label_chi,
+        BMMF.content_cover_page_label_eng,
+        BMMF.content_highlight_label,
+        BMMF.content_highlight_label_chi,
+        BMMF.content_highlight_label_eng,
+        BMMF.controlled_field,
+        BMMF.org_id,
+        BMMF.org_name,
+        BMMF.create_by,
+        BMMF.create_dt,
+        BMMS.is_delete,
+        BMMF.last_upd_by,
+        BMMF.last_upd_dt,
+        BMMS.namespace,
+        BMMS.short_id,
+        BMMFCG.field_id,
+        BMMFCG.controlled_group,
+        BMMFCG.controlled_attribute,
+        BMMFCG.status,
+        BMMFD.updated_by_system,
+        BMMFD.brief,
+        BMMFD.order_brief,
+        BMMFD.detail,
+        BMMFD.order_detail,
+        BMMFD.hit_list,
+        BMMFD.order_hit_list,
+        BMMFD.lock_tag,
+        BMMFP.dc_element,
+        BMMFP.dc_qualifier,
+        BMMFP.ref_table_name,
+        BMMFP.`repeatable`,
+        BMMFP.dc_mandatory,
+        BMMFP.display_field,
+        BMMFP.internal
+        FROM biz_mmis_metadata_schema BMMS
+        LEFT JOIN biz_mmis_metadata_field BMMF ON BMMF.metadata_schema_id = BMMS.id
+        LEFT JOIN biz_mmis_metadata_field_controlled_group BMMFCG ON BMMF.id = BMMFCG.field_id
+        LEFT JOIN biz_mmis_metadata_field_display BMMFD ON BMMF.id = BMMFD.field_id
+        LEFT JOIN biz_mmis_metadata_field_properties BMMFP ON BMMF.id = BMMFP.field_id
+        where BMMS.is_delete = 0 AND BMMS.id IN
+        <foreach collection="ids" open="(" item="id" separator="," close=")">
+            #{id}
+        </foreach>
+
+    </select>
+    <select id="displayList" resultMap="BaseResultMap">
+        SELECT
+            BMMS.id,
+            BMMF.metadata_schema_id,
+            BMMF.element,
+            BMMF.qualifier,
+            BMMF.scope_note,
+            BMMF.type,
+            BMMF.length,
+            BMMF.effective_scope,
+            BMMF.content_cover_page_label,
+            BMMF.content_cover_page_label_chi,
+            BMMF.content_cover_page_label_eng,
+            BMMF.content_highlight_label,
+            BMMF.content_highlight_label_chi,
+            BMMF.content_highlight_label_eng,
+            BMMF.controlled_field,
+            BMMF.org_id,
+            BMMF.org_name,
+            BMMF.create_by,
+            BMMF.create_dt,
+            BMMS.is_delete,
+            BMMF.last_upd_by,
+            BMMF.last_upd_dt,
+            BMMS.namespace,
+            BMMS.short_id,
+            BMMFCG.field_id,
+            BMMFCG.controlled_group,
+            BMMFCG.controlled_attribute,
+            BMMFCG.status,
+            BMMFD.updated_by_system,
+            BMMFD.brief,
+            BMMFD.order_brief,
+            BMMFD.detail,
+            BMMFD.order_detail,
+            BMMFD.hit_list,
+            BMMFD.order_hit_list,
+            BMMFD.lock_tag,
+            BMMFP.dc_element,
+            BMMFP.dc_qualifier,
+            BMMFP.ref_table_name,
+            BMMFP.`repeatable`,
+            BMMFP.dc_mandatory,
+            BMMFP.display_field,
+            BMMFP.internal
+        FROM biz_mmis_metadata_schema BMMS
+                 LEFT JOIN biz_mmis_metadata_field BMMF ON BMMF.metadata_schema_id = BMMS.id
+                 LEFT JOIN biz_mmis_metadata_field_controlled_group BMMFCG ON BMMF.id = BMMFCG.field_id
+                 LEFT JOIN biz_mmis_metadata_field_display BMMFD ON BMMF.id = BMMFD.field_id
+                 LEFT JOIN biz_mmis_metadata_field_properties BMMFP ON BMMF.id = BMMFP.field_id
+        where BMMS.is_delete = 0 order by BMMFD.brief,BMMFD.detail,BMMFD.hit_list,BMMF.content_highlight_label
+    </select>
+    <select id="getInfoByFieldId" resultMap="BaseResultMap">
+        SELECT
+            BMMS.id,
+            BMMF.metadata_schema_id,
+            BMMF.element,
+            BMMF.qualifier,
+            BMMF.scope_note,
+            BMMF.type,
+            BMMF.length,
+            BMMF.effective_scope,
+            BMMF.content_cover_page_label,
+            BMMF.content_cover_page_label_chi,
+            BMMF.content_cover_page_label_eng,
+            BMMF.content_highlight_label,
+            BMMF.content_highlight_label_chi,
+            BMMF.content_highlight_label_eng,
+            BMMF.controlled_field,
+            BMMF.org_id,
+            BMMF.org_name,
+            BMMF.create_by,
+            BMMF.create_dt,
+            BMMS.is_delete,
+            BMMF.last_upd_by,
+            BMMF.last_upd_dt,
+            BMMS.namespace,
+            BMMS.short_id,
+            BMMFCG.field_id,
+            BMMFCG.controlled_group,
+            BMMFCG.controlled_attribute,
+            BMMFCG.status,
+            BMMFD.updated_by_system,
+            BMMFD.brief,
+            BMMFD.order_brief,
+            BMMFD.detail,
+            BMMFD.order_detail,
+            BMMFD.hit_list,
+            BMMFD.order_hit_list,
+            BMMFD.lock_tag,
+            BMMFP.dc_element,
+            BMMFP.dc_qualifier,
+            BMMFP.ref_table_name,
+            BMMFP.`repeatable`,
+            BMMFP.dc_mandatory,
+            BMMFP.display_field,
+            BMMFP.internal
+        FROM biz_mmis_metadata_schema BMMS
+                 LEFT JOIN biz_mmis_metadata_field BMMF ON BMMF.metadata_schema_id = BMMS.id
+                 LEFT JOIN biz_mmis_metadata_field_controlled_group BMMFCG ON BMMF.id = BMMFCG.field_id
+                 LEFT JOIN biz_mmis_metadata_field_display BMMFD ON BMMF.id = BMMFD.field_id
+                 LEFT JOIN biz_mmis_metadata_field_properties BMMFP ON BMMF.id = BMMFP.field_id
+        where BMMS.is_delete = 0 and BMMFCG.field_id = #{metadataFieldId}
+    </select>
+</mapper>
