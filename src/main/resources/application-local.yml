@@ -1,0 +1,70 @@
+# database相关配置
+mysql:
+  host: 192.168.50.70
+  port: 3306
+  db: mydb
+  username: mydbuser
+  password: P@ssw0rd
+# redis缓存相关配置
+redis:
+  host: 192.168.50.75
+  port: 6379
+
+forest:
+  base-address-scheme: http
+  base-address-host: 10.10.6.26
+  base-address-port: 80
+  log-enabled: true
+
+# 上传文件存储路径
+prop:
+  upload-folder: /Users/hyman/file/uploads
+  hls-folder: /Users/hyman/video/hls
+
+#加密key文件地址
+media-stream:
+  decrypt-path: /Users/hyman/video/hls/
+  key-name: enc
+  file-extension: .key
+  info-file-extension: .keyinfo
+  uri: http://127.0.0.1:8090/dev-api/client-api/mediaStream/decrypt?streamToken=%s&identifier=%s
+
+referer:
+  refererDomain:
+    - localhost
+    - 127.0.0.1
+
+doc:
+  enable: true
+  production: false
+
+es:
+  host: 192.168.50.78
+  port: 9200
+  scheme: http
+  enable-auth: true
+  username: elastic
+  password: changeme
+  connect-timeout: 5000
+  socket-timeout: 5000
+  connection-request-timeout: 5000
+  max-connect-num: 100
+  max-connect-per-route: 100
+
+google:
+  cloud:
+    proxy-enable: false
+    proxy-host: 127.0.0.1
+    proxy-port: 19180
+    key-path: /key/googleKey.json
+    bucket-name: tc_test_20220209
+    bucket-path: audio/audio-files/
+    transcript: audio/transcripts/
+
+
+orc:
+  xunfei:
+    api-secret: MDdiYjFjZjcyNzQ4YjUyZTAxNmJkMzI0
+    api-key: 1999e1860880accacccc6d66ea8e67cc
+    app-id: fdcc912c
+    request-url: https://api.xf-yun.com/v1/private/sf8e6aca1
