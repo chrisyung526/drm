@@ -1,5 +1,8 @@
 # database相关配置
 mysql:
+  host: 192.168.50.73
+  port: 3306
+  db: test
   username: mydbuser
   password: P@ssw0rd
 # redis缓存相关配置
