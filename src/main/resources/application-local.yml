@@ -1,11 +1,3 @@
-# database相关配置
-mysql:
-  username: mydbuser
-  password: P@ssw0rd
-# redis缓存相关配置
-redis:
-  host: 192.168.50.75
-  port: 6379
 
 forest:
   base-address-scheme: http
